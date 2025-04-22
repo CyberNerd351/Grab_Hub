@@ -1,0 +1,20 @@
+.send-btn {
+    display: inline-block;
+    background-color: #FFD700;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    text-align: center;
+  }
+  
+  .send-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+    color: white;
+    text-decoration: none;
+  }
+  

@@ -1,0 +1,36 @@
+/* Marquee.css */
+
+/* Styling the marquee container */
+.marquee-container {
+    background-color: #000;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Styling the marquee text */
+.marquee-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc00; /* A warm gold color */
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: marquee 20s linear infinite;
+}
+
+/* Add some highlighted text effect */
+.highlight-text {
+    color: #f06a00; /* A bright orange color for emphasis */
+    font-size: 26px;
+    font-weight: bolder;
+}
+
+/* Animation to make the scrolling smoother */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
