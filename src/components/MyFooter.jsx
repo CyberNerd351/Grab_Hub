@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 const MyFooter = () => {
   const form = useRef();
   const [status, setStatus] = useState("");
-
-  // Input states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -17,10 +15,10 @@ const MyFooter = () => {
 
     emailjs
       .sendForm(
-        'service_68vav8p',      // Replace with actual EmailJS service ID
-        'template_0bnzxp8',     // Replace with actual EmailJS template ID
+        'service_68vav8p',
+        'template_0bnzxp8',
         form.current,
-        'HoiMtgtjeo9hJLvQP'          // Replace with actual EmailJS public key/user ID
+        'HoiMtgtjeo9hJLvQP'
       )
       .then(
         () => {
@@ -35,7 +33,6 @@ const MyFooter = () => {
       );
   };
 
-  // Handlers with prompts
   const handleEmailFocus = () => {
     if (name.trim() === "") {
       alert("Please enter your name first.");
@@ -51,98 +48,108 @@ const MyFooter = () => {
   };
 
   return (
-    <div className="row text-white justify-content-center mt-2 bg-dark p-4">
-      {/* About Us Section */}
-      <div className="col-md-4">
-        <h3>About Us</h3>
-        <p>
-          At Grab Hub, we’re dedicated to bringing you delicious, fresh meals with just a few clicks.
-          Whether you're craving comfort food or something new, our platform connects you to a wide variety
-          of local restaurants and kitchens, delivering great food straight to your door.
-        </p>
+    <footer className="my-footer-wrapper py-5 bg-dark w-100">
+      <div className="container-fluid px-4">
+        <div className="footer-card bg-secondary shadow-lg rounded-4 p-5 text-white">
+          <div className="row">
 
-        <p>At Grab Hub, we bring your favorite meals to your doorstep faster and fresher than ever. With a wide variety of local restaurants, seamless ordering, and unbeatable customer service, we make food delivery easy, reliable, and rewarding. Whether you're at home, work, or on the go — Grab Hub delivers satisfaction in every bite. Choose convenience. Choose quality. Choose Grab Hub.</p>
+            {/* Why Choose Us */}
+            <div className="col-md-4 mb-4">
+              <h4 className="text-warning mb-3">Why Choose Grab Hub?</h4>
+              <ul className="list-unstyled">
+                <li>🚀 <strong>Fast & Reliable:</strong> Prompt delivery every time.</li>
+                <li>🍽️ <strong>Huge Selection:</strong> Dine from 100+ restaurants.</li>
+                <li>🔐 <strong>Secure Payments:</strong> M-Pesa, cards & more.</li>
+                <li>💬 <strong>24/7 Support:</strong> We've always got your back.</li>
+                <li>🌟 <strong>Loyal Customers:</strong> Join thousands who trust us.</li>
+              </ul>
+            </div>
+
+            {/* Contact Us */}
+            <div className="col-md-4 mb-4">
+              <h4 className="text-center text-white card-header bg-warning rounded">Contact Us</h4>
+              <form ref={form} onSubmit={sendEmail} className="mt-3">
+                <div className="form-group">
+                  <label htmlFor="name">Your Name:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="user_name"
+                    className="form-control"
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group mt-3">
+                  <label htmlFor="email">Your Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="user_email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={handleEmailFocus}
+                    required
+                  />
+                </div>
+                <div className="form-group mt-3">
+                  <label htmlFor="message">Your Message:</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    className="form-control"
+                    placeholder="Type your message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onFocus={handleMessageFocus}
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" className="btn btn-warning mt-3 w-100 rounded-pill">
+                  Send Message
+                </button>
+                {status && <p className="mt-3 text-center">{status}</p>}
+              </form>
+            </div>
+
+            {/* Stay Connected */}
+            <div className="col-md-4 mb-4">
+              <h4 className="text-center text-white card-header bg-warning rounded">Stay Connected</h4>
+              <div className="d-flex justify-content-center mt-3 mb-4">
+                <img src="/images/fb.png" alt="Facebook" className="mx-2" style={{ width: '32px' }} />
+                <img src="/images/in.png" alt="LinkedIn" className="mx-2" style={{ width: '32px' }} />
+                <img src="/images/x.png" alt="X (Twitter)" className="mx-2" style={{ width: '32px' }} />
+              </div>
+
+              <h6 className="text-uppercase">Visit Us:</h6>
+              <p>
+                Grab Hub HQ, 2nd Floor, Nairobi Tech Tower<br />
+                Ngong Rd, Nairobi, Kenya
+              </p>
+              <p>
+                <a href="mailto:peternyagaka5@gmail.com" className="text-white d-block">
+                  📧 peternyagaka5@gmail.com
+                </a>
+                <a href="tel:0117067894" className="text-white d-block">
+                  📞 0117067894
+                </a>
+              </p>
+
+              <p className="mt-3">Developed by Peter. &copy; 2025 All rights reserved.</p>
+              <Link to="/terms" className="text-white text-decoration-underline">
+                Terms and Conditions
+              </Link>
+            </div>
+
+          </div>
+        </div>
       </div>
-
-      {/* Contact Us Section */}
-      <div className="col-md-4">
-        <h3 className="text-white text-center card-header">Contact Us</h3>
-        <form ref={form} onSubmit={sendEmail}>
-          <label htmlFor="name">Your Name:</label><br />
-          <input
-            type="text"
-            id="name"
-            name="user_name"
-            placeholder="Enter your name"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <br />
-
-          <label htmlFor="email">Your Email:</label><br />
-          <input
-            type="email"
-            id="email"
-            name="user_email"
-            placeholder="Enter your email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={handleEmailFocus}
-            required
-            disabled={!name}
-          />
-          <br />
-
-          <label htmlFor="message">Your Message:</label><br />
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            placeholder="Leave a comment"
-            className="form-control"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onFocus={handleMessageFocus}
-            required
-            disabled={!email}
-          ></textarea>
-          <br />
-
-          <button type="submit" className="send-btn btn btn-warning">Send Message</button>
-        </form>
-        {status && <p className="mt-3">{status}</p>}
-      </div>
-
-      {/* Stay Connected Section */}
-      <div className="col-md-4">
-        <h3 className="text-white text-center card-header">Stay Connected</h3>
-        <br />
-        <img src="/images/fb.png" alt="Facebook" style={{ width: '32px', margin: '0 5px' }} />
-        <img src="/images/in.png" alt="LinkedIn" style={{ width: '32px', margin: '0 5px' }} />
-        <img src="/images/x.png" alt="X (Twitter)" style={{ width: '32px', margin: '0 5px' }} />
-        <br /><br />
-
-        <h5>Visit us at:</h5>
-        <b>
-          Haven Court 2nd Floor, Waiyaki Way<br />
-          Opposite St Marks Church, Nairobi, Kenya<br />
-          <a href="mailto:peternyagaka5@gmail.com" className="text-white text-decoration-underline">
-            peternyagaka5@gmail.com
-          </a><br />
-          <a href="tel:0117067894" className="text-white text-decoration-underline">
-            Phone: 0117067894
-          </a>
-        </b>
-
-        <p className="p-1 mt-3">Developed by Peter. &copy; 2025. All rights reserved.</p>
-
-        <Link to={"/terms"} className="bg-dark text-white">Terms and Conditions</Link>
-       
-      </div>
-    </div>
+    </footer>
   );
 };
 

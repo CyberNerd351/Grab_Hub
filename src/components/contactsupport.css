@@ -1,0 +1,49 @@
+.contact-support h2 {
+    font-weight: 700;
+    color: #ff6600 !important;
+  }
+  
+  .contact-info-box {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .contact-icon {
+    margin-right: 15px;
+  }
+  
+  .contact-info p {
+    margin: 0;
+  }
+  
+  .contact-info .fw-bold {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .contact-info .mb-0 {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .contact-info-item + .contact-info-item {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+  
+  .contact-support .text-muted {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .contact-support .shadow-lg {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  

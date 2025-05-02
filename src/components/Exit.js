@@ -6,42 +6,75 @@ const Exit = () => {
   const navigate = useNavigate();
 
   const handleLoginRedirect = () => {
-    navigate("/");
+    navigate("/signin"); // Redirect to Sign In
   };
 
   return (
-    <div className="container text-center mt-5 text-white">
-      <h2>You have successfully logged out.</h2>
-      <p>
-        We hope to see you again soon at <strong>Grab Hub</strong>!
-      </p>
+    <div
+      className="d-flex align-items-center justify-content-center vh-100"
+      style={{
+        background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+        color: "white",
+        textAlign: "center",
+        padding: "20px",
+        animation: "fadeIn 1s ease-in-out",
+      }}
+    >
+      <div className="p-5 rounded shadow-lg" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
+        <h1 className="mb-3 fw-bold" style={{ fontSize: "2.5rem" }}>
+          👋 Logged Out Successfully!
+        </h1>
+        <p className="mb-4" style={{ fontSize: "1.2rem" }}>
+          Thank you for using <strong>Grab Hub</strong>.<br />
+          We hope to serve you again soon!
+        </p>
 
-      {/* 🌟 Stylish Login Icon Button */}
-      <button
-        onClick={handleLoginRedirect}
-        className="btn btn-outline-success mt-4"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "10px",
-          fontSize: "1.1rem",
-          fontWeight: "bold",
-          padding: "10px 20px",
-          borderRadius: "30px",
-          boxShadow: "0 0 12px rgba(0,255,0,0.5)",
-          transition: "all 0.3s ease-in-out",
-        }}
-        onMouseOver={(e) =>
-          (e.currentTarget.style.backgroundColor = "rgba(0,255,0,0.2)")
+        {/* Stylish Login Button */}
+        <button
+          onClick={handleLoginRedirect}
+          className="btn btn-outline-light"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "10px",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            padding: "12px 28px",
+            borderRadius: "40px",
+            boxShadow: "0 0 18px rgba(255,255,255,0.3)",
+            transition: "all 0.3s ease-in-out",
+            border: "2px solid #00ffae",
+            background: "linear-gradient(90deg, rgba(0,255,174,0.2), transparent)",
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = "rgba(0,255,174,0.3)";
+            e.currentTarget.style.transform = "scale(1.05)";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+          title="Return to Login Page"
+        >
+          <FaSignInAlt size={20} className="hover-glow" />
+          Login Again
+        </button>
+
+        <p className="mt-4 text-light fst-italic" style={{ fontSize: "0.95rem" }}>
+          You’ll need to sign in to view products and place orders.
+        </p>
+      </div>
+
+      {/* CSS Keyframes */}
+      <style>{`
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: translateY(-10px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
-        onMouseOut={(e) =>
-          (e.currentTarget.style.backgroundColor = "transparent")
+        .hover-glow:hover {
+          filter: drop-shadow(0 0 6px #00ffae);
         }
-        title="Go to Get Products"
-      >
-        <FaSignInAlt size={20} />
-        Login 
-      </button>
+      `}</style>
     </div>
   );
 };
