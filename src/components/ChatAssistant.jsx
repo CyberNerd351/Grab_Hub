@@ -4,51 +4,49 @@ import './chatassistant.css';
 
 const ChatAssistant = () => {
   const [messages, setMessages] = useState([
-    { text: "Hello, I am Grab Bot. Type 'end' to stop the conversation.", isBot: true }
+    { text: "👋 Hello, I am Grab Bot. Ask me anything about Grab Hub. Type 'end' to stop the conversation.", isBot: true }
   ]);
 
   const handleSend = (input) => {
     const userMessage = { text: input, isBot: false };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-    // Simulate chatbot response with basic hardcoded pairs
     let botResponse = getBotResponse(input);
-    if (botResponse) {
-      const botMessage = { text: botResponse, isBot: true };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    }
+    const botMessage = { text: botResponse, isBot: true };
+    setMessages((prevMessages) => [...prevMessages, botMessage]);
   };
 
   const getBotResponse = (input) => {
-    const responses = {
-      "What is Grab Hub?": "🥘 Grab Hub is a food e-commerce platform that connects you with local food vendors and kitchens. Order fresh meals anytime, anywhere – quickly and affordably. 🚀",
-      "How does Grab Hub work?": "🔍 Simply search for a meal, choose your favorite dish 🍛, and pay directly via M-Pesa 💰. Your food will be delivered right to your door 🚪.",
-      "Where is Grab Hub available?": "📍 We currently serve several towns across Kenya 🇰🇪 and are expanding into more areas soon!",
-      "What meals are available today?": "🍽️ You can browse all available meals on our homepage or use the search bar 🔎 to find something.",
-      "How do I pay for food?": "💳 Payments are made easily and securely using M-Pesa at Checkout ✅.",
-      "How long does delivery take?": "⏱️ Most deliveries are made within 30–45 minutes, depending on your location and order size. 🚚",
-      "What do I do when I want to sell on Grab Hub?": "🧑‍🍳 Great! Please contact our admin team through the contact details found at the footer 📞. We'll guide you through the process.",
-      "How do I create a customer account?": "👤 Click on the Sign Up button 🔘. It will take you to the sign-up page where you will be required to fill in the necessary details ✍️, then click the Sign Up button again to create your account.",
-      "What's the most popular meal today?": "🔥 Chicken Biryani 🍗 and Ugali with Beef 🥩 are top-rated today! Would you like to try one? 😋",
-    };
+    const text = input.toLowerCase();
 
-    for (let key in responses) {
-      if (input.toLowerCase().includes(key.toLowerCase())) {
-        return responses[key];
-      }
-    }
-    return "🤖 Sorry, I didn't understand that. Can you rephrase your question?";
+    // Keyword matching
+    if (text.includes("hi") || text.includes("hello")) return "Hi there! 👋 How can I help you today?";
+    if (text.includes("how are you")) return "I'm great! 🤖 Always ready to assist you with anything about Grab Hub.";
+    if (text.includes("bye") || text.includes("goodbye")) return "Goodbye! 👋 Have a great day!";
+    if (text.includes("thank")) return "You're welcome! 😊";
+    if (text.includes("grab hub")) return "Grab Hub is Kenya's top food e-commerce platform! 🍛";
+    if (text.includes("work") || text.includes("how do i use") || text.includes("how to use")) return "Just browse meals, pick your favorite 🍽️, pay via M-Pesa 💰, and wait for delivery 🚚.";
+    if (text.includes("available") || text.includes("location") || text.includes("area")) return "We are currently available in major towns across Kenya 🇰🇪 and expanding.";
+    if (text.includes("meal") || text.includes("food")) return "You can find meals like Pilau, Chapati, Biryani, Ugali and many more on our homepage!";
+    if (text.includes("pay") || text.includes("payment") || text.includes("m-pesa")) return "We accept secure payments via M-Pesa and debit cards 💳.";
+    if (text.includes("delivery")) return "Deliveries typically take 30–45 minutes ⏱️ depending on location.";
+    if (text.includes("sell") || text.includes("vendor") || text.includes("partner")) return "🧑‍🍳 To sell on Grab Hub, contact us using the form at the footer or email our admin.";
+    if (text.includes("sign up") || text.includes("register") || text.includes("create account")) return "👤 Click the Sign Up button and fill in your info to create an account.";
+    if (text.includes("popular") || text.includes("top") || text.includes("best")) return "🔥 Chicken Biryani 🍗 and Ugali with Beef 🥩 are trending today!";
+    if (text.includes("support") || text.includes("help")) return "We offer 24/7 support 💬. You can contact us anytime.";
+
+    return "🤖 I'm not sure I understood that. Try rephrasing or asking something else about Grab Hub.";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const input = e.target.input.value;
-    if (input.toLowerCase() !== "end") {
-      handleSend(input);
-      e.target.input.value = "";
+    const input = e.target.input.value.trim();
+    if (input.toLowerCase() === "end") {
+      setMessages((prevMessages) => [...prevMessages, { text: "👋 Grab Bot: Conversation ended. See you again soon!", isBot: true }]);
     } else {
-      setMessages([...messages, { text: "Grab Bot: Goodbye! Have a nice day.", isBot: true }]);
+      handleSend(input);
     }
+    e.target.reset();
   };
 
   return (
