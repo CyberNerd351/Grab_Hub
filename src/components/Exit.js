@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSignInAlt } from "react-icons/fa";
+import { FaBoxOpen } from "react-icons/fa";
 
 const Exit = () => {
   const navigate = useNavigate();
 
   const handleLoginRedirect = () => {
-    navigate("/signin"); // Redirect to Sign In
+    navigate("/"); // Redirect to Get Products instead of Sign In
   };
 
   return (
@@ -29,7 +29,7 @@ const Exit = () => {
           We hope to serve you again soon!
         </p>
 
-        {/* Stylish Login Button */}
+        {/* Redirect to Get Products */}
         <button
           onClick={handleLoginRedirect}
           className="btn btn-outline-light"
@@ -54,14 +54,14 @@ const Exit = () => {
             e.currentTarget.style.backgroundColor = "transparent";
             e.currentTarget.style.transform = "scale(1)";
           }}
-          title="Return to Login Page"
+          title="Go to Product Page"
         >
-          <FaSignInAlt size={20} className="hover-glow" />
-          Login Again
+          <FaBoxOpen size={20} className="hover-glow" />
+          Browse Products
         </button>
 
         <p className="mt-4 text-light fst-italic" style={{ fontSize: "0.95rem" }}>
-          You’ll need to sign in to view products and place orders.
+          You can continue to explore available products without signing in.
         </p>
       </div>
 
