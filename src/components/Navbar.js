@@ -7,9 +7,11 @@ import {
   FaPlusCircle,
   FaQuestionCircle,
   FaUserCircle,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaComments
 } from "react-icons/fa";
 import { Modal, Button, Form } from "react-bootstrap";
+import ChatAssistant from "./ChatAssistant"; // 👈 Make sure this path is correct
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [showHelpDropdown, setShowHelpDropdown] = useState(false);
+  const [showChat, setShowChat] = useState(false); // 👈 New state for chat popup
 
   const navigate = useNavigate();
 
@@ -43,7 +46,11 @@ const Navbar = () => {
   };
 
   const handlePersonIconClick = () => {
-    navigate("/signup"); // Navigate to the signup/signin page
+    navigate("/signup");
+  };
+
+  const toggleChat = () => {
+    setShowChat(!showChat);
   };
 
   return (
@@ -66,7 +73,7 @@ const Navbar = () => {
             <FaPlusCircle className="me-1" /> Add Products
           </Link>
 
-          {/* Help Dropdown Trigger */}
+          {/* Help Dropdown */}
           <div className="position-relative">
             <span
               onClick={() => setShowHelpDropdown(!showHelpDropdown)}
@@ -75,7 +82,6 @@ const Navbar = () => {
             >
               <FaQuestionCircle className="me-1" /> Help
             </span>
-
             {showHelpDropdown && (
               <div
                 className="position-absolute bg-dark p-2 rounded"
@@ -88,8 +94,15 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* User Account Controls */}
+        {/* Right Controls */}
         <div className="right-controls d-flex align-items-center gap-3">
+          <FaComments
+            size={22}
+            className="text-white"
+            style={{ cursor: "pointer" }}
+            onClick={toggleChat}
+            title="Chat Assistant"
+          />
           <FaUserCircle
             size={24}
             className="text-white"
@@ -98,20 +111,18 @@ const Navbar = () => {
             title="Sign Up / Sign In"
           />
           {isLoggedIn && (
-            <>
-              <button
-                className="btn btn-outline-warning"
-                onClick={handleLogout}
-                title="Log Out"
-              >
-                <FaSignOutAlt /> Log Out
-              </button>
-            </>
+            <button
+              className="btn btn-outline-warning"
+              onClick={handleLogout}
+              title="Log Out"
+            >
+              <FaSignOutAlt /> Log Out
+            </button>
           )}
         </div>
       </nav>
 
-      {/* Admin Password Modal */}
+      {/* Admin Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>🔒 Admin Access</Modal.Title>
@@ -136,6 +147,28 @@ const Navbar = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Chat Assistant Popup */}
+      {showChat && (
+        <div
+          className="chat-popup position-fixed shadow rounded bg-white"
+          style={{
+            bottom: "80px",
+            right: "30px",
+            width: "350px",
+            maxHeight: "500px",
+            zIndex: 9999,
+            overflow: "hidden",
+          }}
+        >
+          <div className="d-flex justify-content-end p-2 border-bottom">
+            <button className="btn btn-sm btn-danger" onClick={toggleChat}>✖</button>
+          </div>
+          <div style={{ height: "100%", overflowY: "auto" }}>
+            <ChatAssistant />
+          </div>
+        </div>
+      )}
     </>
   );
 };
