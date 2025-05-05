@@ -6,23 +6,17 @@ import {
   FaInfoCircle,
   FaPlusCircle,
   FaQuestionCircle,
-  FaComments,
-  FaUser,
-  FaSignOutAlt,
-  FaCog
+  FaUserCircle,
+  FaSignOutAlt
 } from "react-icons/fa";
 import { Modal, Button, Form } from "react-bootstrap";
-import ChatAssistant from "./ChatAssistant";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [userName, setUserName] = useState("Peter Nyagaka");
   const [showModal, setShowModal] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [showHelpDropdown, setShowHelpDropdown] = useState(false);
-  const [showChatModal, setShowChatModal] = useState(false);
-  const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,6 +42,10 @@ const Navbar = () => {
     }
   };
 
+  const handlePersonIconClick = () => {
+    navigate("/signup"); // Navigate to the signup/signin page
+  };
+
   return (
     <>
       <nav className="navbar d-flex align-items-center justify-content-between px-3">
@@ -68,7 +66,7 @@ const Navbar = () => {
             <FaPlusCircle className="me-1" /> Add Products
           </Link>
 
-          {/* Help Dropdown */}
+          {/* Help Dropdown Trigger */}
           <div className="position-relative">
             <span
               onClick={() => setShowHelpDropdown(!showHelpDropdown)}
@@ -88,45 +86,19 @@ const Navbar = () => {
               </div>
             )}
           </div>
-
-          {/* Settings Dropdown */}
-          <div className="position-relative">
-            <FaCog
-              size={22}
-              className="text-white"
-              style={{ cursor: "pointer" }}
-              title="Settings"
-              onClick={() => setShowSettingsDropdown(!showSettingsDropdown)}
-            />
-            {showSettingsDropdown && (
-              <div
-                className="position-absolute bg-dark p-2 rounded"
-                style={{ top: "40px", left: 0, minWidth: "180px", zIndex: 1000 }}
-              >
-                <Link to="/signin" className="d-block text-white mb-2">🔑 Sign In</Link>
-                <Link to="/signup" className="d-block text-white mb-2">📝 Sign Up</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Chat Assistant Icon */}
-          <FaComments
-            size={24}
-            className="text-white"
-            onClick={() => setShowChatModal(true)}
-            style={{ cursor: "pointer" }}
-            title="Chat Assistant"
-          />
         </div>
 
         {/* User Account Controls */}
         <div className="right-controls d-flex align-items-center gap-3">
+          <FaUserCircle
+            size={24}
+            className="text-white"
+            onClick={handlePersonIconClick}
+            style={{ cursor: "pointer" }}
+            title="Sign Up / Sign In"
+          />
           {isLoggedIn && (
             <>
-              <span className="user-info text-white d-flex align-items-center">
-                <FaUser className="me-1" size={20} />
-                {userName}
-              </span>
               <button
                 className="btn btn-outline-warning"
                 onClick={handleLogout}
@@ -163,16 +135,6 @@ const Navbar = () => {
             Continue
           </Button>
         </Modal.Footer>
-      </Modal>
-
-      {/* Chat Assistant Modal */}
-      <Modal show={showChatModal} onHide={() => setShowChatModal(false)} centered size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>💬 Grab Hub Chat Assistant</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ChatAssistant />
-        </Modal.Body>
       </Modal>
     </>
   );
