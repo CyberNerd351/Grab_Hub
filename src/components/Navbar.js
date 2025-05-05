@@ -8,7 +8,8 @@ import {
   FaQuestionCircle,
   FaComments,
   FaUser,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaCog
 } from "react-icons/fa";
 import { Modal, Button, Form } from "react-bootstrap";
 import ChatAssistant from "./ChatAssistant";
@@ -21,6 +22,7 @@ const Navbar = () => {
   const [adminPassword, setAdminPassword] = useState("");
   const [showHelpDropdown, setShowHelpDropdown] = useState(false);
   const [showChatModal, setShowChatModal] = useState(false);
+  const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
 
   const navigate = useNavigate();
 
@@ -66,7 +68,7 @@ const Navbar = () => {
             <FaPlusCircle className="me-1" /> Add Products
           </Link>
 
-          {/* Help Dropdown Trigger */}
+          {/* Help Dropdown */}
           <div className="position-relative">
             <span
               onClick={() => setShowHelpDropdown(!showHelpDropdown)}
@@ -83,6 +85,26 @@ const Navbar = () => {
               >
                 <Link to="/faq" className="d-block text-white mb-2">📘 FAQs</Link>
                 <Link to="/support" className="d-block text-white mb-2">📞 Contact Support</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Settings Dropdown */}
+          <div className="position-relative">
+            <FaCog
+              size={22}
+              className="text-white"
+              style={{ cursor: "pointer" }}
+              title="Settings"
+              onClick={() => setShowSettingsDropdown(!showSettingsDropdown)}
+            />
+            {showSettingsDropdown && (
+              <div
+                className="position-absolute bg-dark p-2 rounded"
+                style={{ top: "40px", left: 0, minWidth: "180px", zIndex: 1000 }}
+              >
+                <Link to="/signin" className="d-block text-white mb-2">🔑 Sign In</Link>
+                <Link to="/signup" className="d-block text-white mb-2">📝 Sign Up</Link>
               </div>
             )}
           </div>
