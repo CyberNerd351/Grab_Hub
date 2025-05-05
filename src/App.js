@@ -26,6 +26,7 @@ function App() {
       <header className="App-header">
 
           <h1 className='mt-3'>GRAB HUB — Quick Orders. Tasty Rewards.</h1>
+          <p>Your favorite food, delivered in a snap. Order now and enjoy!</p>
 
       </header> 
 
